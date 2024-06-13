@@ -5,6 +5,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { IoSaveOutline } from "react-icons/io5";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { MdDeleteOutline } from "react-icons/md";
 
 const Tasks = () => {
   const apiUrl = import.meta.env.VITE_SERVER_URL;
@@ -45,6 +46,34 @@ const Tasks = () => {
         refetchAllTasks();
         setEditTaskId(null);
       });
+  };
+  // delete task by id
+
+  const deleteTaskById = (task) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${apiUrl}/tasks/${task._id}`)
+          .then((res) => {
+            console.log(res);
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            refetchAllTasks();
+          });
+      }
+    });
   };
 
   return (
@@ -88,6 +117,9 @@ const Tasks = () => {
                     {/* edot icon */}
                     <div onClick={() => handleEditClick(task)} className="absolute top-5 right-5 cursor-pointer">
                       <FaRegEdit className="text-2xl" />
+                    </div>
+                    <div onClick={() => deleteTaskById(task)} className="absolute bottom-5 right-5 cursor-pointer">
+                      <MdDeleteOutline className="text-2xl" />
                     </div>
                   </Fragment>
                 )}
