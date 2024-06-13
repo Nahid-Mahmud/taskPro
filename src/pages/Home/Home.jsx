@@ -1,12 +1,15 @@
 import TaskForm from "../../components/home/TaskForm";
 
+import Tasks from "./Tasks";
+
 const Home = () => {
-  // usestate for form data
+  // get all tasks
 
   return (
     <div className="bg-primary min-h-screen p-10">
       {/* create a form  */}
       <TaskForm />
+      <Tasks />
     </div>
   );
 };

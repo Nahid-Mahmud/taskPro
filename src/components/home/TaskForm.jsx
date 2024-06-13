@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import useGetAllTasks from "../../hooks/useGetAllTasks";
 
 const TaskForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
   });
+
+  const { refetchAllTasks } = useGetAllTasks();
 
   const apiUrl = import.meta.env.VITE_SERVER_URL;
 
@@ -17,7 +21,15 @@ const TaskForm = () => {
     axios
       .post(`${apiUrl}/tasks`, formData)
       .then((res) => {
-        // console.log(res); 
+        // console.log(res);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your task has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetchAllTasks();
       })
       .catch((err) => {
         console.log(err);
