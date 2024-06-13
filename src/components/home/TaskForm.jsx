@@ -9,7 +9,7 @@ const TaskForm = () => {
     description: "",
   });
 
-  const { refetchAllTasks } = useGetAllTasks();
+  const { refetchAllTasks, isLoading } = useGetAllTasks();
 
   const apiUrl = import.meta.env.VITE_SERVER_URL;
 
@@ -30,6 +30,10 @@ const TaskForm = () => {
           timer: 1500,
         });
         refetchAllTasks();
+        setFormData({
+          title: "",
+          description: "",
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -70,6 +74,7 @@ const TaskForm = () => {
         <button
           type="submit"
           name="submit"
+          disabled={isLoading}
           className="bg-[#c541e2] hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Add Todo
