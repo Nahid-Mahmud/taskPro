@@ -95,7 +95,7 @@ const Tasks = () => {
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap -m-4">
           {allTasks?.map((task) => (
-            <div key={task?._id} className="xl:w-1/3 md:w-1/2 p-4">
+            <div key={task?._id} className="xl:w-1/3 md:w-1/2 w-full p-4">
               <div className="border border-gray-200 p-6 rounded-lg bg-secondary text-white relative">
                 {editTaskId === task?._id ? (
                   <form onSubmit={(e) => handleEditChange(e)}>
