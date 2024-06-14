@@ -6,6 +6,7 @@ import { IoSaveOutline } from "react-icons/io5";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { MdDeleteOutline } from "react-icons/md";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const Tasks = () => {
   const apiUrl = import.meta.env.VITE_SERVER_URL;
@@ -79,6 +80,12 @@ const Tasks = () => {
     });
   };
 
+  // cancel save
+
+  const handleCancel = () => {
+    setEditTaskId(null);
+  };
+
   if (isLoading) {
     return <div className=" text-white text-center py-10 text-3xl">Loading...</div>;
   }
@@ -113,9 +120,14 @@ const Tasks = () => {
                         onChange={(e) => setEditTask({ ...editTask, description: e.target.value })}
                       ></textarea>
                     </div>
-                    <button type="submit" className="absolute top-5 right-5 cursor-pointer ">
-                      <IoSaveOutline className="text-2xl" />
-                    </button>
+                    <div className="absolute top-5 right-5 flex gap-2">
+                      <button type="submit" className="">
+                        <IoSaveOutline title="Save" className="text-2xl" />
+                      </button>
+                      <button onClick={handleCancel}>
+                        <IoMdCloseCircleOutline title="Cancel" className="text-2xl" />
+                      </button>
+                    </div>
                   </form>
                 ) : (
                   <Fragment>

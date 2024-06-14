@@ -6,27 +6,28 @@ const MainLayout = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const handleAllResourcesLoaded = () => {
+    // const handleAllResourcesLoaded = () => {
+    //   setLoading(false);
+    // };
+
+    // // check if all resources are loaded
+    // if (document.readyState === "complete") {
+    //   handleAllResourcesLoaded();
+    // }
+
+    // const handleLoad = () => {
+    //   handleAllResourcesLoaded();
+    // };
+
+    // window.addEventListener("load", handleLoad);
+
+    // return () => {
+    //   window.removeEventListener("load", handleLoad);
+    // };
+    setTimeout(() => {
       setLoading(false);
-    };
-
-    // check if all resources are loaded
-    if (document.readyState === "complete") {
-      handleAllResourcesLoaded();
-    }
-
-    const handleLoad = () => {
-      handleAllResourcesLoaded();
-    };
-
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
+    }, 1500);
   }, []);
-
-
 
   if (loading) {
     return <Loader />;
