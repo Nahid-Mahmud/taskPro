@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 
 const useGetAllTasks = () => {
   const apiUrl = import.meta.env.VITE_SERVER_URL;

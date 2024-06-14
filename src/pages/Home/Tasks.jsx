@@ -9,7 +9,7 @@ import { MdDeleteOutline } from "react-icons/md";
 
 const Tasks = () => {
   const apiUrl = import.meta.env.VITE_SERVER_URL;
-  const { allTasks = [], isLoading, refetchAllTasks } = useGetAllTasks();
+  const { allTasks = [], refetchAllTasks, isLoading } = useGetAllTasks();
   const [editTask, setEditTask] = useState({
     title: "",
     description: "",
@@ -22,6 +22,9 @@ const Tasks = () => {
     setEditTask(task);
     console.log(editTaskId);
   };
+
+  // console.log(allTasks);
+  console.log(isLoading);
 
   // confirm edited data to server
 
@@ -75,6 +78,10 @@ const Tasks = () => {
       }
     });
   };
+
+  if (isLoading) {
+    return <div className=" text-white text-center py-10 text-3xl">Loading...</div>;
+  }
 
   return (
     <section className="text-gray-600 body-font">
